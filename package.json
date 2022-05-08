@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"NO TESTS RIGHT NOW\"",
     "prepare": "husky install",
-    "prettier:write": "prettier --write ."
+    "prettier:write": "prettier --write .",
+    "start": "node src/index.js"
   },
   "author": "Anuj Pancholi",
   "license": "ISC",
