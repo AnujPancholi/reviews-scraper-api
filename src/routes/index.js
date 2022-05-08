@@ -1,8 +1,9 @@
-const PingRouter = require('./ping');
+const PingRouter = require('./ping')
 
-
-module.exports = [{
+module.exports = [
+  {
     defaultPath: 'ping',
     router: PingRouter.Router,
     deps: PingRouter.deps,
-}];
+  },
+]
