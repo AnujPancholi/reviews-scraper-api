@@ -7,7 +7,8 @@
     "test": "echo \"NO TESTS RIGHT NOW\"",
     "prepare": "husky install",
     "prettier:write": "prettier --write .",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "dockerup": "docker-compose up"
   },
   "author": "Anuj Pancholi",
   "license": "ISC",
