@@ -68,10 +68,10 @@ const Responder = (deps = {}) => {
       error: {
         name: error.name,
         message: error.message,
+        stack: error.stack,
       },
-      stack: error.stack,
     })
-    if (error instanceof 'ResponsefulError') {
+    if (error instanceof ResponsefulError) {
       res.builder = getResponseBuilder()
         .setCode(error.response.code)
         .setHeaders(error.response.headers)

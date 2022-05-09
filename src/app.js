@@ -1,5 +1,5 @@
 const express = require('express')
-const logger = require('./lib/logger.js')
+const getLogger = require('./lib/logger.js')
 const requestLogger = require('pino-http')
 const { v4: generateNewUuid } = require('uuid')
 const Responder = require('./lib/responder.js')
@@ -7,7 +7,14 @@ const routes = require('./routes')
 const config = require('./config.js')
 
 const initApp = (deps) => {
-  const { requestLogger, routes, responder, basePath, version } = deps
+  const {
+    requestLogger,
+    routes,
+    responder,
+    basePath,
+    version,
+    bootstrapLogger,
+  } = deps
 
   const app = express()
 
@@ -29,6 +36,9 @@ const initApp = (deps) => {
   }
 
   routes.forEach(({ defaultPath, router, deps: routerDeps }) => {
+    bootstrapLogger.info({
+      msg: `Adding router: ${basePath}/${version}/${defaultPath}`,
+    })
     app.use(
       `${basePath}/${version}/${defaultPath}`,
       router({
@@ -47,7 +57,7 @@ const initApp = (deps) => {
 module.exports = initApp({
   routes,
   requestLogger: requestLogger({
-    logger: logger({
+    logger: getLogger({
       tag: 'request_logs',
     }),
     genReqId: function (req) {
@@ -55,8 +65,11 @@ module.exports = initApp({
       return req.id
     },
   }),
+  bootstrapLogger: getLogger({
+    tag: 'server_bootstrap_logs',
+  }),
   responder: Responder({
-    errorLogger: logger({
+    errorLogger: getLogger({
       tag: 'error_logs',
     }),
   }),
