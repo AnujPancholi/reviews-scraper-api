@@ -135,16 +135,11 @@ const ScrapingUtils = (deps) => {
 
           const reviewsNodeList = document.querySelectorAll('div.review')
           const reviewList = [...reviewsNodeList].map((reviewDomNode) => {
-            const { reviewMetaDomNode, reviewContentDomNode } = [
-              ...reviewDomNode.children,
-            ].reduce((obj, domNode, i) => {
-              obj[i === 0 ? 'reviewMetaDomNode' : 'reviewContentDomNode'] =
-                domNode
-              return obj
-            }, {})
+            const reviewMetaDomNode = reviewDomNode.querySelector('.leftCol')
+            const reviewContentDomNode =
+              reviewDomNode.querySelector('.rightCol')
 
             const { text, title } = getDataFromContentNode(reviewContentDomNode)
-
             const { reviewer, date, rating } =
               getDataFromMetaNode(reviewMetaDomNode)
 
