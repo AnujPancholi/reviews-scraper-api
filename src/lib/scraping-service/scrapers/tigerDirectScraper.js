@@ -161,11 +161,6 @@ const ScrapingUtils = (deps) => {
             null
           )
         } catch (e) {
-          //   return {
-          //       isSuccessful: false,
-          //       data: null,
-          //       error: e,
-          //   }
           return getScrapingResponse(false, null, {
             name: e.name,
             message: e.message,
