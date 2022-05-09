@@ -60,6 +60,11 @@ const ScrapingUtils = (deps) => {
           }
         }
 
+        const removeTrailingChar = (ch) => (str) =>
+          str[str.length - 1] === ch ? str.slice(0, str.length - 1) : str
+        const removeTrailingColon = removeTrailingChar(':')
+        const removeTrailingComma = removeTrailingChar(',')
+
         try {
           const errorContainerDomNode = document.querySelector('.errors')
 
@@ -94,22 +99,30 @@ const ScrapingUtils = (deps) => {
             const ratingInfoParsed = {}
             for (let i = 1; i < itemReviewChildren.length; i += 2) {
               ratingInfoParsed[
-                [itemReviewChildren[i - 1].innerText.trim().toLowerCase()]
-              ] = itemReviewChildren[i].innerText.trim()
+                [
+                  removeTrailingColon(
+                    itemReviewChildren[i - 1].innerText.trim().toLowerCase()
+                  ),
+                ]
+              ] = removeTrailingComma(itemReviewChildren[i].innerText.trim())
             }
 
             const reviewerChildren = [...reviewerDomNode.children]
             const reviewrInfoParsed = {}
             for (let i = 1; i < reviewerChildren.length; i += 2) {
               reviewrInfoParsed[
-                [reviewerChildren[i - 1].innerText.trim().toLowerCase()]
-              ] = reviewerChildren[i].innerText.trim()
+                [
+                  removeTrailingColon(
+                    reviewerChildren[i - 1].innerText.trim().toLowerCase()
+                  ),
+                ]
+              ] = removeTrailingComma(reviewerChildren[i].innerText.trim())
             }
 
             return {
               rating: ratingInfoParsed['overall'],
-              reviewer: reviewrInfoParsed['reviewer:'],
-              date: reviewrInfoParsed['date:'],
+              reviewer: reviewrInfoParsed['reviewer'],
+              date: reviewrInfoParsed['date'],
             }
           }
 
