@@ -5,4 +5,7 @@ module.exports = {
   getCurrVer: () => {
     return process.env.VERSION ?? 'v0.1'
   },
+  getBrowserBinPath: () => {
+    return process.env.CHROME_BIN ?? ''
+  },
 }
