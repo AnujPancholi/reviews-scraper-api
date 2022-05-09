@@ -213,5 +213,5 @@ module.exports = ScrapingUtils({
   }),
   siteName: 'TigerDirect',
   siteUrl:
-    'https://www.tigerdirect.com/applications/SearchTools/item-details.asp',
+    'https://www.tigerdirect.com/applications/searchtools/item-details.asp',
 })

@@ -20,7 +20,7 @@ const ScraperRouter = (deps) => {
       const urlObj = new URL(req.body.url)
 
       req.sanitizedUrlArgs = {
-        url: `${urlObj.origin}${urlObj.pathname}`,
+        url: `${urlObj.origin}${urlObj.pathname}`.toLowerCase(),
         params: ((paramsMap) => {
           const paramsObj = {}
           paramsMap.forEach((value, key) => {
