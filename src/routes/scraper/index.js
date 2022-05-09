@@ -42,6 +42,14 @@ const ScraperRouter = (deps) => {
           throw new ResponsefulError('Scraper not found for target site', 404)
         }
 
+        const scraperUrlValidation = scraper.validateUrl(req.sanitizedUrlArgs)
+        if (!scraperUrlValidation.isValidated) {
+          throw new ResponsefulError(
+            scraperUrlValidation?.error?.message ?? 'Scraper validation failed',
+            400
+          )
+        }
+
         const scrapingResult = await scraper.scrape({
           url: scrapingParams.href,
           traceId: req.id,
