@@ -8,3 +8,13 @@ An API to scrape reviews on products from https://www.tigerdirect.com/applicatio
 ### Starting up
 
 `docker-compose up`
+
+### Sample Request
+
+```
+curl --location --request POST 'http://127.0.0.1:3001/api/v0.1/scraper/scrape' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "url": "https://www.tigerdirect.com/applications/SearchTools/item-details.asp?EdpNo=640254&CatId=3"
+}'
+```
