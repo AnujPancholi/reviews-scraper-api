@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer')
+const config = require('../../../config.js')
 const getLogger = require('../../logger.js')
 
 const ScrapingUtils = (deps) => {
@@ -35,9 +36,8 @@ const ScrapingUtils = (deps) => {
         siteName,
         url,
       })
-
       const browser = await puppeteer.launch({
-        executablePath: '/usr/bin/chromium-browser',
+        executablePath: config.getBrowserBinPath(),
         devtools: process.env.NODE_ENV === 'debug',
         headless: true,
         args: [

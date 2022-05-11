@@ -6,6 +6,6 @@ module.exports = {
     return process.env.VERSION ?? 'v0.1'
   },
   getBrowserBinPath: () => {
-    return process.env.CHROME_BIN ?? ''
+    return process.env.CHROME_BIN ?? '/usr/bin/google-chrome'
   },
 }
