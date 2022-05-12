@@ -169,7 +169,6 @@ const ScrapingUtils = (deps) => {
         }
       })
 
-      console.log(result)
       await browser.close()
 
       return result
